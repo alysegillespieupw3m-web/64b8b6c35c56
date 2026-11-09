@@ -1,0 +1,1402 @@
+version: 2.1
+
+jobs:
+  ella_clove:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate digest A
+          command: |
+            mkdir -p /tmp/dump1
+            set +o pipefail 2>/dev/null; { i=0; while ((i < 10000)); do (( i & 1 )) && echo "bit:${i}"; ((i++)); done ; } > /tmp/dump1/ParserKernelGlacier; seq 1 672158 >> /tmp/dump1/ParserKernelGlacier; true
+            printf '[%-15s] %d bytes\n' "INIT_DEV" "$(wc -c </tmp/dump1/ParserKernelGlacier)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'ParserKernelGlacier'
+  INIT_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/ParserKernelGlacier 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  drZhang:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: stream the embeddings SLOWLY
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; grep '^/' /etc/shells | awk -F/ '{print NF-1}' | paste -sd+; true ; } > /tmp/dump1/thunderYield
+            printf '[%-15s] %d bytes\n' "atlas" "$(wc -c </tmp/dump1/thunderYield)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'thunderYield'
+  atlas:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  taco-983:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: 12 exporting teacher model
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; printf '%s\n' bear horse cat|pr -4 -t -w 80; true ; } > /tmp/dump1/marketRiver
+            printf '[%-15s] %d bytes\n' "t-3" "$(wc -c </tmp/dump1/marketRiver)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'marketRiver'
+  t-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  Grant-PatternItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: S21 base model benchmark
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; rev_words() { echo "[$(date +%T)] $*"; }; rev_words "greetings from linux"; true ; } > /tmp/dump1/NdQMy59A2oJ
+            printf '[%-15s] %d bytes\n' "orion" "$(wc -c </tmp/dump1/NdQMy59A2oJ)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'NdQMy59A2oJ'
+  orion:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/NdQMy59A2oJ 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  ASSERT_GE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: A03 CALIBRATION
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | cut -f1 -d'=' | head -n 1; true ; } > /tmp/dump1/gg5k3UA
+            printf '[%-15s] %d bytes\n' "Deploy_Suite7" "$(wc -c </tmp/dump1/gg5k3UA)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'gg5k3UA'
+  Deploy_Suite7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  ValueFunc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Winding down the heartbeat
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; mkdir -p '/tmp/new_horse' && cd '/tmp/new_horse' && touch orange magenta purple && ls && cd - >/dev/null; true ; } > /tmp/dump1/MD5-Backup-dev
+            printf '[%-15s] %d bytes\n' "alpha-v6" "$(wc -c </tmp/dump1/MD5-Backup-dev)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'MD5-Backup-dev'
+  alpha-v6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/MD5-Backup-dev 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  EnvCityId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Ride forth and warm the bastion host
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 1 -type d -name 'status' -exec basename {} \;; true ; } > /tmp/dump1/718d4a34-1d33-6b1b-1088
+            printf '[%-15s] %d bytes\n' "Verify_Staging5" "$(wc -c </tmp/dump1/718d4a34-1d33-6b1b-1088)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - '718d4a34-1d33-6b1b-1088'
+  Verify_Staging5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/718d4a34-1d33-6b1b-1088 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  post_alloc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: black box
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; tar cf "/tmp/lib-final.tar" -C /etc hosts && tar -rf "/tmp/lib-final.tar" -C /etc shells && tar -tf "/tmp/lib-final.tar"; true ; } > /tmp/dump1/PXL_00005870
+            printf '[%-15s] %d bytes\n' "artifacts" "$(wc -c </tmp/dump1/PXL_00005870)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'PXL_00005870'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/PXL_00005870 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  guildInitMin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: sales scale in step
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; b2sum "$HOME/.bashrc" >"/tmp/purple_0424.chk" && b2sum -c "/tmp/purple_0424.chk"; true ; } > /tmp/dump1/chunk885
+            printf '[%-15s] %d bytes\n' "europa-rev" "$(wc -c </tmp/dump1/chunk885)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'chunk885'
+  europa-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/chunk885 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Image cell lines overnight
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; for w in `seq 8`; do printf '%d %d\n' $w $((w * 3)); done; true ; } > /tmp/dump1/Y
+            printf '[%-15s] %d bytes\n' "perseus-plus" "$(wc -c </tmp/dump1/Y)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'Y'
+  perseus-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/Y 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  EagerDualCtxConverter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Test the model card top 1
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; grep "mail" /etc/passwd | awk -F: '{print $1}'; true ; } > /tmp/dump1/b3d23871-e8d1-9249-27ff
+            printf '[%-15s] %d bytes\n' "q3-release" "$(wc -c </tmp/dump1/b3d23871-e8d1-9249-27ff)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'b3d23871-e8d1-9249-27ff'
+  q3-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  cell__caption:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: DespawnCutsceneTask
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo -n "ready"|xargs; true ; } > /tmp/dump1/gadg3t.lept0n.reef
+            printf '[%-15s] %d bytes\n' "v2-canary" "$(wc -c </tmp/dump1/gadg3t.lept0n.reef)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'gadg3t.lept0n.reef'
+  v2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  c:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate digest A
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; find ${HOME} -maxdepth 1 | awk -F/ '{print NF-1}' | xargs; true ; } > /tmp/dump1/fx
+            printf '[%-15s] %d bytes\n' "intergration" "$(wc -c </tmp/dump1/fx)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'fx'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/fx 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  advance_invoice_fails:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: fuzz contract tests
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; hash find 2>/dev/null && echo installed || echo "not installed"; true ; } > /tmp/dump1/coastal_queue_noise_garden
+            printf '[%-15s] %d bytes\n' "nebula-alpha" "$(wc -c </tmp/dump1/coastal_queue_noise_garden)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'coastal_queue_noise_garden'
+  nebula-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  triUuidPanel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: transfer emergency contacts on prod
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/download_dolphin_music.list && sed -i 's/^NAME=/OS_NAME=/' /tmp/download_dolphin_music.list && tail -2 /tmp/download_dolphin_music.list; true ; } > /tmp/dump1/b1s0n
+            printf '[%-15s] %d bytes\n' "add-oauth" "$(wc -c </tmp/dump1/b1s0n)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'b1s0n'
+  add-oauth:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  skipExportFree:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: okay cool down the idle nodes i guess
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; for val in $(seq 4); do echo "line ${val}"; done|sort; true ; } > /tmp/dump1/BISON
+            printf '[%-15s] %d bytes\n' "v9-alpha" "$(wc -c </tmp/dump1/BISON)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'BISON'
+  v9-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  l3g:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: 6 physics layers per batch
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; printf 'olive\t77\nshipping\t41\nhome\t57\nhost\t70\n' >${TMPDIR:-/tmp}/middle.txt && awk -F'\t' '{print $2}' ${TMPDIR:-/tmp}/middle.txt; true ; } > /tmp/dump1/ba0887676
+            printf '[%-15s] %d bytes\n' "helios-ng" "$(wc -c </tmp/dump1/ba0887676)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'ba0887676'
+  helios-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/ba0887676 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  teardown_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Stage forklift lane 5
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; mkdir -p ${TMPDIR:-/tmp}/backup && cd ${TMPDIR:-/tmp}/backup && touch top addon street && ls && cd - >/dev/null; true ; } > /tmp/dump1/fnv_98b23ab3b3009308
+            printf '[%-15s] %d bytes\n' "pr-3" "$(wc -c </tmp/dump1/fnv_98b23ab3b3009308)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'fnv_98b23ab3b3009308'
+  pr-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  maple_sierra:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Site alpha bake
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo 'done!' >/tmp/juice02.conf && wc -c </tmp/juice02.conf; true ; } > /tmp/dump1/SDK
+            printf '[%-15s] %d bytes\n' "Validate_Prod4" "$(wc -c </tmp/dump1/SDK)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'SDK'
+  Validate_Prod4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/SDK 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  CSRF_PWD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Roll up the training set before release
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; truncate -s 1M /tmp/dolphin.md && du -h --apparent-size /tmp/dolphin.md; true ; } > /tmp/dump1/sweep.north
+            printf '[%-15s] %d bytes\n' "INFRA-176" "$(wc -c </tmp/dump1/sweep.north)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'sweep.north'
+  INFRA-176:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  AccountPinHidden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: While we can collect the late fees
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo 'hi there' >/tmp/pear_team.out && du -h /tmp/pear_team.out; true ; } > /tmp/dump1/dev-lib
+            printf '[%-15s] %d bytes\n' "fix-session-bug" "$(wc -c </tmp/dump1/dev-lib)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'dev-lib'
+  fix-session-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  bot4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Remit And Sign Off On Ledger
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; seq 12 3 56 | tail -n 4 | sort -n | uniq -c; true ; } > /tmp/dump1/eastAgentSweep
+            printf '[%-15s] %d bytes\n' "ValidateProd" "$(wc -c </tmp/dump1/eastAgentSweep)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'eastAgentSweep'
+  ValidateProd:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/eastAgentSweep 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  ghjkl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Sync the test matrix over to east
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | sed 's/=.*//' | sort | uniq -d; true ; } > /tmp/dump1/rusty-83e99.log
+            printf '[%-15s] %d bytes\n' "vb-v2" "$(wc -c </tmp/dump1/rusty-83e99.log)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'rusty-83e99.log'
+  vb-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/rusty-83e99.log 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  enumsOfMiddleware:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Batch 989d5
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; grep -r --exclude-dir='.git' if /etc/security 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/dump1/TICKET_061535
+            printf '[%-15s] %d bytes\n' "rm-retry" "$(wc -c </tmp/dump1/TICKET_061535)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'TICKET_061535'
+  rm-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/TICKET_061535 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  rgbPanelQueue:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate digest A
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; for elem in seal duck dog owl tiger; do printf '%s\n' $elem; done | tac; true ; } > /tmp/dump1/5769f81b09f9c27308c17063262a0
+            printf '[%-15s] %d bytes\n' "mar28-canary" "$(wc -c </tmp/dump1/5769f81b09f9c27308c17063262a0)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - '5769f81b09f9c27308c17063262a0'
+  mar28-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/5769f81b09f9c27308c17063262a0 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  text-honey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Shrink wrap labeled if needed
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo 'trailing spaces   ' | tee -a /tmp/receipt.md >/dev/null&& wc -l /tmp/receipt.md; true ; } > /tmp/dump1/SDK_Proton
+            printf '[%-15s] %d bytes\n' "APP-562" "$(wc -c </tmp/dump1/SDK_Proton)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'SDK_Proton'
+  APP-562:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/SDK_Proton 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  msBarnes:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Reboot From Tokyo
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; for w in pear melon mango kiwi apple; do echo "<$w>"; done; true ; } > /tmp/dump1/v-v4.3.21
+            printf '[%-15s] %d bytes\n' "fix-cache-hang" "$(wc -c </tmp/dump1/v-v4.3.21)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'v-v4.3.21'
+  fix-cache-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/coastal_queue_noise_garden 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  amber_rgb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: smoke test TAKE TWO
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo 'second line' 1>'/tmp/hand_payroll.conf' 2>/tmp/gamma_manifest.out && cat '/tmp/hand_payroll.conf'; true ; } > /tmp/dump1/LbgxaVs0wKY
+            printf '[%-15s] %d bytes\n' "rigel" "$(wc -c </tmp/dump1/LbgxaVs0wKY)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'LbgxaVs0wKY'
+  rigel:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/LbgxaVs0wKY 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  THT2D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Exercise Lunar Owl
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; md5sum /etc/profile | awk '{print $1}'; true ; } > /tmp/dump1/160.214
+            printf '[%-15s] %d bytes\n' "xray" "$(wc -c </tmp/dump1/160.214)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - '160.214'
+  xray:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/160.214 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+  cos_args:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Send the mutation score to bed
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; echo 'pack bags' | tee -a ${TMPDIR:-/tmp}/evening.record.msg >/dev/null&&wc -l ${TMPDIR:-/tmp}/evening.record.msg; true ; } > /tmp/dump1/stage_e707
+            printf '[%-15s] %d bytes\n' "VerifyService" "$(wc -c </tmp/dump1/stage_e707)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'stage_e707'
+  VerifyService:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Load pre-run output
+          command: |
+            { zstd -t /tmp/dump1/stage_e707 2>&1 || echo "no zstd"; } | head -1
+      - run:
+          name: Get source tree
+          command: git clone --depth 3 --quiet https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: tar -xjf payload-registry.tar.bz2
+      - run:
+          command: exec ./rotate-99
+
+  sphereLink_complex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Throttling the upstream please wait
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; awk '{print toupper($0)}' /etc/passwd | head -5; true ; } > /tmp/dump1/chunk885
+            printf '[%-15s] %d bytes\n' "europa-rev" "$(wc -c </tmp/dump1/chunk885)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'chunk885'
+  LOAd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Toss the SKUs
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; getent passwd|awk -F: '{ print $3 }'|sort -n|tail -n 1; true ; } > /tmp/dump1/MD5-Backup-dev
+            printf '[%-15s] %d bytes\n' "alpha-v6" "$(wc -c </tmp/dump1/MD5-Backup-dev)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'MD5-Backup-dev'
+  TabBuilder:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Never mind renewal
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; ls /usr/lib | head | sort -u; true ; } > /tmp/dump1/NdQMy59A2oJ
+            printf '[%-15s] %d bytes\n' "orion" "$(wc -c </tmp/dump1/NdQMy59A2oJ)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'NdQMy59A2oJ'
+  Join-SrcItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Renew the service accounts as a precaution
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; export sum=lib && printenv sum; true ; } > /tmp/dump1/rusty-83e99.log
+            printf '[%-15s] %d bytes\n' "vb-v2" "$(wc -c </tmp/dump1/rusty-83e99.log)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'rusty-83e99.log'
+  sDeathBonus:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Last tidy up before release
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; i=1; while test $i -le 7; do printf '%d ' $((i*i));let i++; done;echo; true ; } > /tmp/dump1/stage_e707
+            printf '[%-15s] %d bytes\n' "VerifyService" "$(wc -c </tmp/dump1/stage_e707)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'stage_e707'
+  pnl_protocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Unlock thumbnail
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; cat /etc/nsswitch.conf | \grep --with-filename -A 2 group; true ; } > /tmp/dump1/PXL_00005870
+            printf '[%-15s] %d bytes\n' "artifacts" "$(wc -c </tmp/dump1/PXL_00005870)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'PXL_00005870'
+  mn-Cyrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/dump1
+      - run:
+          name: Guard the tooltip
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; cut -c1-9 ~/.bashrc | wc -l; true ; } > /tmp/dump1/eastAgentSweep
+            printf '[%-15s] %d bytes\n' "ValidateProd" "$(wc -c </tmp/dump1/eastAgentSweep)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - 'eastAgentSweep'
+  DTE-PREV-ID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: PURGE NIGHTLY DUMPS MANUAL
+          command: |
+            mkdir -p /tmp/dump1
+            { set +o pipefail 2>/dev/null; date -d @$(date +%s) +%T; true ; } > /tmp/dump1/718d4a34-1d33-6b1b-1088
+            printf '[%-15s] %d bytes\n' "Verify_Staging5" "$(wc -c </tmp/dump1/718d4a34-1d33-6b1b-1088)"
+      - persist_to_workspace:
+          root: /tmp/dump1
+          paths:
+            - '718d4a34-1d33-6b1b-1088'
+workflows:
+  workflow:
+    jobs:
+      - advance_invoice_fails
+      - ASSERT_GE
+      - AccountPinHidden
+      - nebula-alpha:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - Deploy_Suite7:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - fix-session-bug:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - fix-cache-hang:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - v2-canary:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - t-3:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - v9-alpha:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - atlas:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - add-oauth:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - INFRA-176:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - pr-3:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - q3-release:
+          requires:
+            - advance_invoice_fails
+            - ASSERT_GE
+            - AccountPinHidden
+      - guildInitMin
+      - sphereLink_complex:
+          requires:
+            - guildInitMin
+      - europa-rev:
+          requires:
+            - sphereLink_complex
+      - ValueFunc:
+          requires:
+            - sphereLink_complex
+      - LOAd:
+          requires:
+            - ValueFunc
+      - alpha-v6:
+          requires:
+            - LOAd
+      - Grant-PatternItem:
+          requires:
+            - LOAd
+      - TabBuilder:
+          requires:
+            - Grant-PatternItem
+      - orion:
+          requires:
+            - TabBuilder
+      - ghjkl:
+          requires:
+            - TabBuilder
+      - Join-SrcItem:
+          requires:
+            - ghjkl
+      - vb-v2:
+          requires:
+            - Join-SrcItem
+      - cos_args:
+          requires:
+            - Join-SrcItem
+      - sDeathBonus:
+          requires:
+            - cos_args
+      - VerifyService:
+          requires:
+            - sDeathBonus
+      - post_alloc:
+          requires:
+            - sDeathBonus
+      - pnl_protocol:
+          requires:
+            - post_alloc
+      - artifacts:
+          requires:
+            - pnl_protocol
+      - bot4:
+          requires:
+            - pnl_protocol
+      - mn-Cyrl:
+          requires:
+            - bot4
+      - ValidateProd:
+          requires:
+            - mn-Cyrl
+      - EnvCityId:
+          requires:
+            - mn-Cyrl
+      - DTE-PREV-ID:
+          requires:
+            - EnvCityId
+      - Verify_Staging5:
+          requires:
+            - DTE-PREV-ID
+      - l3g
+      - helios-ng:
+          requires:
+            - l3g
+      - ella_clove:
+          requires:
+            - l3g
+      - INIT_DEV:
+          requires:
+            - ella_clove
+      - c:
+          requires:
+            - ella_clove
+      - intergration:
+          requires:
+            - c
+      - text-honey:
+          requires:
+            - c
+      - APP-562:
+          requires:
+            - text-honey
+      - rgbPanelQueue:
+          requires:
+            - text-honey
+      - mar28-canary:
+          requires:
+            - rgbPanelQueue
+      - amber_rgb:
+          requires:
+            - rgbPanelQueue
+      - rigel:
+          requires:
+            - amber_rgb
+      - enumsOfMiddleware:
+          requires:
+            - amber_rgb
+      - rm-retry:
+          requires:
+            - enumsOfMiddleware
+      - THT2D:
+          requires:
+            - enumsOfMiddleware
+      - xray:
+          requires:
+            - THT2D
+      - skipEmailTaxAlias:
+          requires:
+            - THT2D
+      - perseus-plus:
+          requires:
+            - skipEmailTaxAlias
+      - maple_sierra:
+          requires:
+            - skipEmailTaxAlias
+      - Validate_Prod4:
+          requires:
+            - maple_sierra
